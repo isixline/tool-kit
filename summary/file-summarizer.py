@@ -3,6 +3,9 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.docstore.document import Document
 from langchain.chains.summarize import load_summarize_chain
 import argparse
+from dotenv import load_dotenv
+
+load_dotenv()
 
 parser = argparse.ArgumentParser()
 parser.add_argument('file_path', type=str)
@@ -17,6 +20,6 @@ with open(args.file_path) as f:
 texts = text_splitter.split_text(state_of_the_union)
 docs = [Document(page_content=t) for t in texts[:3]]
 
-chain = load_summarize_chain(llm, chain_type="stuff")
+chain = load_summarize_chain(llm, chain_type="map_reduce")
 summarize = chain.run(docs)
 print(summarize)
