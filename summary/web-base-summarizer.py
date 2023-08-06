@@ -11,7 +11,7 @@ def summarize_web_page(url):
     docs = loader.load()
 
     llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo-16k")
-    chain = load_summarize_chain(llm, chain_type="stuff")
+    chain = load_summarize_chain(llm, chain_type="map_reduce")
 
     summarize = chain.run(docs)
     return summarize
